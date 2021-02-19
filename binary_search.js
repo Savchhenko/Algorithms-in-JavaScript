@@ -41,9 +41,11 @@ function randomArr(len) {
 const sorting = randomArr(1000).sort((a, b) => a - b);
 console.log(sorting);
 
-console.log('Frequency of occurrence:', countFreq(sorting, el));
+console.log('Frequency of occurrence (bin):', countFreq(sorting, el));
+console.log('Frequency of occurrence (lin):', linearCountFreq(sorting, el));
 
-//function that counts the frequency of occurrence of a particular element
+//binary function that counts the frequency of occurrence of a particular element
+//  this is for huge arrays
 function countFreq(arr, el) {
     const posEl = binarySearchElement(arr, el); //element's position in array
     if (posEl === -1) {
@@ -58,4 +60,16 @@ function countFreq(arr, el) {
         j++;
     }
     return j - i - 1;
+}
+
+//linear function that counts the frequency of occurrence of a particular element
+//  this is for small arrays
+function linearCountFreq(arr, el) {
+    let result = 0;
+    for (let i=0; i < arr.length; i++) {
+        if (arr[i] === el) {
+            result++;
+        }
+    }
+    return result;
 }
